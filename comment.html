@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CastlePage</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      @font-face {
+        font-family: 'DungGeunMo';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff')
+          format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: 'DungGeunMo', Arial, sans-serif;
+      }
+      .guestbook {
+        max-width: 600px;
+        margin: 6rem auto;
+        padding: 2rem;
+        background: #f0f7f0;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .guestbook-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .guestbook-form input,
+      .guestbook-form textarea {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: 'DungGeunMo', Arial, sans-serif;
+      }
+      .guestbook-form textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      .guestbook-form button {
+        padding: 0.5rem;
+        background: #184e1f;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: 'DungGeunMo', Arial, sans-serif;
+      }
+      .guestbook-form button:hover {
+        background: #0e3a14;
+      }
+      .guestbook-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .guestbook-item {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+      }
+      .guestbook-item h3 {
+        margin: 0 0 0.5rem 0;
+        color: #184e1f;
+      }
+      .guestbook-item p {
+        margin: 0;
+      }
+      .guestbook-title {
+        color: #184e1f;
+      }
+      .suggestion {
+        max-width: 630px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background: #f0f7f0;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .suggestion-title {
+        color: #184e1f;
+      }
+      .suggestion-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .suggestion-form textarea {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        min-height: 100px;
+        resize: vertical;
+        font-family: 'DungGeunMo', Arial, sans-serif;
+      }
+      .suggestion-form button {
+        padding: 0.5rem;
+        background: #184e1f;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: 'DungGeunMo', Arial, sans-serif;
+      }
+      .suggestion-form button:hover {
+        background: #0e3a14;
+      }
+      .suggestion-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .suggestion-item {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+      }
+      .suggestion-item p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-left">
+        <a href="index.html">
+          <i
+            class="fa-solid fa-house fa-flip-horizontal"
+            style="color: #184e1f; font-size: 2.5rem"
+          ></i>
+        </a>
+        <a href="task.html">
+          <i
+            class="fa-solid fa-folder"
+            style="color: #184e1f; font-size: 2.5rem"
+          ></i>
+        </a>
+      </div>
+      <h1 class="main-title">2SH's Page</h1>
+      <div class="navbar-right">
+        <a href="comment.html">
+          <i
+            class="fa-solid fa-comment"
+            style="color: #184e1f; font-size: 2.5rem"
+          ></i>
+        </a>
+        <a href="login.html">
+          <i
+            class="fa-solid fa-user"
+            style="color: #184e1f; font-size: 2.5rem"
+          ></i>
+        </a>
+      </div>
+    </header>
+    <main>
+      <div class="guestbook">
+        <h2 class="guestbook-title">방명록</h2>
+        <div class="guestbook-form">
+          <input type="text" id="guestName" placeholder="이름" required />
+          <textarea
+            id="guestMessage"
+            placeholder="메시지를 입력하세요"
+            required
+          ></textarea>
+          <button id="submitBtn">작성</button>
+        </div>
+        <div class="guestbook-list" id="guestbookList"></div>
+      </div>
+
+      <div class="suggestion">
+        <h2 class="suggestion-title">건의사항</h2>
+        <div class="suggestion-form">
+          <textarea
+            id="suggestionMessage"
+            placeholder="건의사항을 입력하세요"
+            required
+          ></textarea>
+          <button id="suggestionBtn">작성</button>
+        </div>
+        <div class="suggestion-list" id="suggestionList"></div>
+      </div>
+    </main>
+    <script>
+      const guestName = document.getElementById('guestName')
+      const guestMessage = document.getElementById('guestMessage')
+      const submitBtn = document.getElementById('submitBtn')
+      const guestbookList = document.getElementById('guestbookList')
+
+      // 방명록 작성
+      submitBtn.addEventListener('click', () => {
+        if (!guestName.value || !guestMessage.value) {
+          alert('이름과 메시지를 입력해 주세요.')
+          return
+        }
+
+        const item = document.createElement('div')
+        item.className = 'guestbook-item'
+        item.innerHTML = `
+    <h3>${guestName.value}</h3>
+    <p>${guestMessage.value}</p>
+  `
+        guestbookList.appendChild(item)
+
+        // 입력창 초기화
+        guestName.value = ''
+        guestMessage.value = ''
+      })
+      const suggestionMessage = document.getElementById('suggestionMessage')
+      const suggestionBtn = document.getElementById('suggestionBtn')
+      const suggestionList = document.getElementById('suggestionList')
+
+      suggestionBtn.addEventListener('click', () => {
+        if (!suggestionMessage.value) {
+          alert('건의사항을 입력해 주세요.')
+          return
+        }
+        const item = document.createElement('div')
+        item.className = 'suggestion-item'
+        item.innerHTML = `
+    <p>${suggestionMessage.value}</p>
+  `
+        suggestionList.appendChild(item)
+        suggestionMessage.value = ''
+      })
+    </script>
+  </body>
+</html>

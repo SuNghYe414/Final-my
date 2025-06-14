@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CastlePage</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      @font-face {
+        font-family: 'DungGeunMo';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff')
+          format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: 'DungGeunMo', Arial, sans-serif;
+      }
+      body.body-login {
+        font-family: 'DungGeunMo', Arial, sans-serif;
+        background: #f0f7f0;
+        margin: 0;
+        padding: 0;
+      }
+      .login-container {
+        max-width: 400px;
+        margin: 7rem auto;
+        padding: 2rem;
+        background: #f0f7f0;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .login-title {
+        text-align: center;
+        color: #184e1f;
+        margin-bottom: 1.5rem;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: 'DungGeunMo', Arial, sans-serif;
+      }
+      .login-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background: #184e1f;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-family: 'DungGeunMo', Arial, sans-serif;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+      .login-btn:hover {
+        background: #0e3a14;
+      }
+      .login-links {
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .login-links a {
+        color: #184e1f;
+        text-decoration: none;
+        margin: 0 0.5rem;
+      }
+      .login-links a:hover {
+        text-decoration: underline;
+      }
+      .signup-container {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-left">
+        <a href="index.html">
+          <i
+            class="fa-solid fa-house fa-flip-horizontal"
+            style="color: #184e1f; font-size: 2.5rem"
+          ></i>
+        </a>
+        <a href="task.html">
+          <i
+            class="fa-solid fa-folder"
+            style="color: #184e1f; font-size: 2.5rem"
+          ></i>
+        </a>
+      </div>
+      <h1 class="main-title">2SH's Page</h1>
+      <div class="navbar-right">
+        <a href="comment.html">
+          <i
+            class="fa-solid fa-comment"
+            style="color: #184e1f; font-size: 2.5rem"
+          ></i>
+        </a>
+        <a href="login.html">
+          <i
+            class="fa-solid fa-user"
+            style="color: #184e1f; font-size: 2.5rem"
+          ></i>
+        </a>
+      </div>
+    </header>
+    <main>
+      <div class="login-container" id="loginContainer">
+        <h2 class="login-title">로그인</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="userId">아이디</label>
+            <input type="text" id="userId" name="userId" required />
+          </div>
+          <div class="form-group">
+            <label for="userPw">비밀번호</label>
+            <input type="password" id="userPw" name="userPw" required />
+          </div>
+          <button type="submit" class="login-btn">로그인</button>
+        </form>
+        <div class="login-links">
+          <a href="#" id="showSignup">회원가입</a>
+          <a href="#" id="showForgot">비밀번호 찾기</a>
+        </div>
+      </div>
+
+      <div class="login-container signup-container" id="signupContainer">
+        <h2 class="login-title">회원가입</h2>
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="signupId">아이디</label>
+            <input type="text" id="signupId" name="signupId" required />
+          </div>
+          <div class="form-group">
+            <label for="signupPw">비밀번호</label>
+            <input type="password" id="signupPw" name="signupPw" required />
+          </div>
+          <button type="submit" class="login-btn">회원가입</button>
+        </form>
+        <div class="login-links">
+          <a href="#" id="showLogin">로그인 화면으로</a>
+        </div>
+      </div>
+    </main>
+    <script>
+      // 회원가입/로그인 전환
+      document.getElementById('showSignup').addEventListener('click', (e) => {
+        e.preventDefault()
+        document.getElementById('loginContainer').style.display = 'none'
+        document.getElementById('signupContainer').style.display = 'block'
+      })
+      document.getElementById('showLogin').addEventListener('click', (e) => {
+        e.preventDefault()
+        document.getElementById('loginContainer').style.display = 'block'
+        document.getElementById('signupContainer').style.display = 'none'
+      })
+      document.getElementById('showForgot').addEventListener('click', (e) => {
+        e.preventDefault()
+        alert('비밀번호 찾기 기능은 준비 중입니다.')
+      })
+
+      // 회원가입
+      document.getElementById('signupForm').addEventListener('submit', (e) => {
+        e.preventDefault()
+        const id = document.getElementById('signupId').value
+        const pw = document.getElementById('signupPw').value
+        if (!id || !pw) {
+          alert('아이디와 비밀번호를 입력해 주세요.')
+          return
+        }
+        // 로컬 스토리지에 저장
+        const users = JSON.parse(localStorage.getItem('users') || '[]')
+        if (users.some((user) => user.id === id)) {
+          alert('이미 존재하는 아이디입니다.')
+          return
+        }
+        users.push({ id, pw })
+        localStorage.setItem('users', JSON.stringify(users))
+        alert('회원가입이 완료되었습니다!')
+        document.getElementById('signupId').value = ''
+        document.getElementById('signupPw').value = ''
+        document.getElementById('loginContainer').style.display = 'block'
+        document.getElementById('signupContainer').style.display = 'none'
+      })
+
+      // 로그인
+      document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault()
+        const id = document.getElementById('userId').value
+        const pw = document.getElementById('userPw').value
+        if (!id || !pw) {
+          alert('아이디와 비밀번호를 입력해 주세요.')
+          return
+        }
+        // 로컬 스토리지에서 확인
+        const users = JSON.parse(localStorage.getItem('users') || '[]')
+        const user = users.find((user) => user.id === id && user.pw === pw)
+        if (user) {
+          alert('로그인 성공!')
+          // 로그인 성공 시 홈으로 이동
+          window.location.href = 'index.html'
+        } else {
+          alert('아이디 또는 비밀번호가 일치하지 않습니다.')
+        }
+      })
+    </script>
+  </body>
+</html>
